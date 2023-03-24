@@ -1,0 +1,25 @@
+{
+  "name": "study-app",
+  "version": "1.0.0",
+  "description": "Organizacion para contenidos de estudios por topicos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  
+  },
+  "keywords": [
+    "facultad",
+    "contenido",
+    "semestres"
+  ],
+  "author": "Jose Valdez",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21",
+    "pg": "^8.9.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.29.0"
+  }
+}
