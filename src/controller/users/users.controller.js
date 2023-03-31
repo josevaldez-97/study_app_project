@@ -1,13 +1,15 @@
 const { sequelize } = require("../../connection");
 const { UserModel } = require("../../model/users/user.model");
-const  UserService  = require("../../service/users/users.service")
-
+const UserService = require('../../service/users/users.service');
 const listar = async function (req, res) {
-    console.log("listar usuarios");
+    console.log("listar usuarios controller");
+
     try {
-        const users = await UserService.listar(req.query.filtro || '');
+       // 
+       const users = await UserService.listar(req.query.filtro || '');
 
         if (users) {
+            // En users[0] se encuentra el listado de lo que se recupera desde el SQL
             res.json({
                 success: true,
                 usuarios: users
@@ -28,9 +30,12 @@ const listar = async function (req, res) {
 };
 
 const consultarPorCodigo = async function (req, res) {
-    console.log("consultar 1 usuario por codigo");
+    console.log("consultar usuarios");
+
     try {
-        const userModelResult = await UserService.consultarPorCodigo(req.params.id);
+        // Buscar en la base de datos por codigo
+        const userModelResult = await UserService.consultarPorCodigo(req.query.filtro || '');
+
         if (userModelResult) {
             res.json({
                 success: true,
@@ -52,46 +57,70 @@ const consultarPorCodigo = async function (req, res) {
 };
 
 const actualizar = async function (req, res) {
-    console.log("actualizar usuarios");
+    console.log("actualizar usuarios controller");
+
+
+    // res.send("actualiza los usuarios")
+    // variables
     let usuarioRetorno = null; // guarda el usuario que se va incluir o editar
+    //const data = req.body; // se optiene los datos del cuerpo de la peticion 
+   // const id = req.body.id;
 
     try {
-        usuarioRetorno = await UserService.actualizar( req.body.id, req.body.name, req.body.lastname,
-                                                       req.body.avatar, req.body.email, 
-                                                       req.body.password, req.body.deleted);
+        
+    usuarioRetorno = await UserService.actualizar(
+        req.body.id, 
+        req.body.name, 
+        req.body.last_name,
+        req.body.avatar,
+        req.body.email,
+        req.body.password,
+        req.body.deleted);
+
         res.json({
-        success: true,
-        user: usuarioRetorno
-    });
+            success:true,
+            user: usuarioRetorno
+        })
+
     } catch (error) {
         console.log(error);
-        res.json({
-            success: false,
-            error: error.message
-        });
-    };
+
+         res.json({
+        success: false,
+        error: error.message
+    });
+};
 }
 
 
 const eliminar = async function (req, res) {
     console.log("eliminar usuarios");
-    //BorradoFisico
-    //UserModel.destroy(req.params.id);
+
+    // borrado fisico
+   //  UserModel.destroy(req.params.id);
     try {
-        await UserService.eliminar(req.params.id);
+
+ await UserService.eliminar(req.params.filtro || "");
         res.json({
             success: true
-        });
+        })
+
+    /*    await sequelize.query("UPDATE users SET deleted = true WHERE id=  " + req.params.id);
+        res.json({
+            success: true
+        });*/
+
+
     } catch (error) {
         console.log(error);
         res.json({
             success: false,
-            error: error.message
+            error : error.message
         });
     }
 };
 
 
 module.exports = {
-    listar, consultarPorCodigo, actualizar, eliminar
+    listar, busquedaPorCodigo: consultarPorCodigo, actualizar, eliminar
 };

@@ -1,75 +1,71 @@
 const { sequelize } = require("../../connection");
-const {ThemesModel} = require('../../model/themes/themes.model');
-const ThemeService = require('../../service/themes/themes.service');
+const {ThemesPropertiesModel} = require('../../model/themes_properties/themes.properties.model');
+const themesPropertiesService = require('../../service/themes_properties/themes.properties.service');
 
 const listar = async function(req, res){
-    console.log("Listar temas");
+    console.log("Listar Propiedades de los temas");
 
     try{
-        const themes = await ThemeService.listar(req.query.filtro ||'');
+        const themes_properties = await themesPropertiesService.listar(req.query.filtro ||'');
 
-        if( themes){
+        if( themes_properties){
             res.json({
                 success : true,
-                temas : themes
+                temasProperties : themes_properties
             });
         } else{
             res.json({
                 success : true,
-                temas : []
+                temasProperties : []
             });
         }
     } catch(error){
         console.log(error);
         res.json({
             success : true,
-            temas : error.message
+            temasProperties : error.message
         });
     }
 };
 
 const consultarPorCodigo = async function(req, res) {
-    console.log("consultar temas por codigo");
+    console.log("consultar propiedades de temas por codigo");
 
     try{
-          const themesModelResult = await ThemeService.consultarPorCodigo(req.params.filtro || ""); 
+          const themesPropertiesModelResult = await themesPropertiesService.consultarPorCodigo(req.params.filtro || ""); 
         
 
-        if (themesModelResult){
+        if (themesPropertiesModelResult){
             res.json({
                 success : true,
-               temas : themesModelResult
+               temasProperties : themesPropertiesModelResult
             });
         } else {
             res.json({
                 success : true,
-                temas : null
+                temasProperties : null
             });
             }
  }  catch(error){
     console,log(error);
     res.json({
         success : false,
-        temas : error.message
+        temasProperties : error.message
     });
  }
 };
 
 const actualizar =  async function(req, res){
-    console.log("Actualizar temas");
-    let temaRetorno = null;
+    console.log("Actualizar propiedades del temas");
+    let temaPropertiesRetorno = null;
     try{ 
-temaRetorno = await ThemeService.actualizar(req.body.id,
-    req.body.create_date,
-    req.body.name,
-    req.body.descripcion,
-    req.body.keywords,
-    req.body.owner_user_id,
-    req.body.deleted,
+temaPropertiesRetorno = await themesPropertiesService.actualizar(req.body.id,
+    req.body.property_name,
+    req.body.property_value,
     );
         res.json({
             success: true,
-            user: temaRetorno
+            user: temaPropertiesRetorno
         })
        
                                                                                                                                                                                                                                             
@@ -78,7 +74,7 @@ temaRetorno = await ThemeService.actualizar(req.body.id,
         console.log(error);
         res.json({
             success : false,
-            usuarios : error.message
+            temasProperties : error.message
         });
     }
 };
@@ -87,11 +83,11 @@ temaRetorno = await ThemeService.actualizar(req.body.id,
 
 
 const eliminar = async function(req, res){
-    console.log("Eliminar usuarios");
+    console.log("Eliminar propiedad del tema");
 
 try{
 
-    await ThemeService.eliminar(req.params.filtro || "");
+    await themesPropertiesService.eliminar(req.params.filtro || "");
         res.json({
             success: true
         })
@@ -109,4 +105,3 @@ try{
 module.exports ={
     listar, busquedaPorCodigo: consultarPorCodigo, actualizar, eliminar
 };
-

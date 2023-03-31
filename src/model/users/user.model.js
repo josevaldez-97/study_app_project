@@ -30,10 +30,12 @@ password:{
     allowNull:true
 },
 deleted: {
-    type: DataTypes.STRING,
+    type: DataTypes.BOOLEAN,
     allowNull:false
 }
 }, {
+
+// Nombre de la tabla de la BD
     tableName: 'users',
     timestamps: false
 });
@@ -41,3 +43,4 @@ deleted: {
 module.exports ={
     UserModel
 };
+
