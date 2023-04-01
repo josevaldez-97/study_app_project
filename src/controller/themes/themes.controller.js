@@ -47,7 +47,7 @@ const consultarPorCodigo = async function(req, res) {
             });
             }
  }  catch(error){
-    console,log(error);
+    console.log(error);
     res.json({
         success : false,
         temas : error.message

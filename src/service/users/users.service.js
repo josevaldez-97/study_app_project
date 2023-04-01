@@ -31,7 +31,7 @@ const consultarPorCodigo = async function (id) {
 
     try {
         // Buscar en la base de datos por codigo
-        const userModelResult = await UserModel.findByPk(req.params.id);
+        const userModelResult = await UserModel.findByPk(id);
 
         if (userModelResult) {
            return userModelResult;

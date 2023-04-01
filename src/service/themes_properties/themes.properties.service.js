@@ -7,9 +7,9 @@ const listar = async function(textoBuscar){
 
     try {
         const themesProperties = await sequelize.query(`SELECT * 
-        FROM themesProperties
+        FROM themes_properties
         WHERE 1=1
-       AND UPPER(name) LIKE UPPER ('%${textoBuscar}%')
+       AND UPPER(property_name) LIKE UPPER ('%${textoBuscar}%')
         ORDER BY id`);
 
         if(themesProperties && themesProperties[0]){
@@ -45,14 +45,14 @@ const consultarPorCodigo = async function (id) {
         }
 };
 
-const actualizar = async function (theme_id, property_name, property_value) {
+const actualizar = async function (id , theme_id, property_name, property_value) {
     console.log("actualizar propiedades del temas");
 
 
     // res.send("actualiza los usuarios")
     // variables
     let themespropertiesRetorno = null; // guarda el usuario que se va incluir o editar
-   const data = {theme_id, property_name, property_value};
+   const data = {id , theme_id, property_name, property_value};
    // const id = req.body.id;
 
     try {
