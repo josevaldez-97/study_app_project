@@ -53,7 +53,7 @@ const actualizar = async function (id , theme_id, property_name, property_value)
     // variables
     let themespropertiesRetorno = null; // guarda el usuario que se va incluir o editar
    const data = {id , theme_id, property_name, property_value};
-   // const id = req.body.id;
+   
 
     try {
         
@@ -87,7 +87,7 @@ const eliminar = async function (id) {
    //  UserModel.destroy(req.params.id);
     try {
 
-        ThemesPropertiesModel.destroy ({ where : { id: codigo } }, { truncate: false });
+        ThemesPropertiesModel.destroy ({ where : { id: id } }, { delete : true });
     
     } catch (error) {
         console.log(error);
