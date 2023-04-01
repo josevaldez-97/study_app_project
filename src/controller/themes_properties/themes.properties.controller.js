@@ -47,7 +47,7 @@ const consultarPorCodigo = async function(req, res) {
             });
             }
  }  catch(error){
-    console,log(error);
+    console.log(error);
     res.json({
         success : false,
         temasProperties : error.message
@@ -57,15 +57,17 @@ const consultarPorCodigo = async function(req, res) {
 
 const actualizar =  async function(req, res){
     console.log("Actualizar propiedades del temas");
-    let temaPropertiesRetorno = null;
+    let themesPropertiesRetorno = null;
     try{ 
-temaPropertiesRetorno = await themesPropertiesService.actualizar(req.body.id,
+themesPropertiesRetorno = await themesPropertiesService.actualizar(
+    req.body.id,
+    req.body.themes_id,
     req.body.property_name,
     req.body.property_value,
     );
         res.json({
             success: true,
-            user: temaPropertiesRetorno
+            themesProperties : themesPropertiesRetorno
         })
        
                                                                                                                                                                                                                                             
@@ -74,7 +76,7 @@ temaPropertiesRetorno = await themesPropertiesService.actualizar(req.body.id,
         console.log(error);
         res.json({
             success : false,
-            temasProperties : error.message
+            themesProperties : error.message
         });
     }
 };
