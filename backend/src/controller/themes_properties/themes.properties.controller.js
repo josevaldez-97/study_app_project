@@ -102,3 +102,5 @@ try{
 module.exports ={
     listar, busquedaPorCodigo: consultarPorCodigo, actualizar, eliminar
 };
+
+//funcionando 
