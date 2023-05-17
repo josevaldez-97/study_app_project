@@ -11,7 +11,7 @@ const listar = async function(req, res){
         try {
             const topics = await TopicService.listar(req.query.filtro || '');
 
-            if (topics) {                // en users[0] se encuentra el listado de lo que se recupera desde el sql
+            if (topics) {                
                res.json({
                 success: true,
                 topico: topics
@@ -27,8 +27,8 @@ const listar = async function(req, res){
         } catch (error) {
             console.log(error)
             res.json({
-                success:true,
-                topico: error.message
+                success:false,
+                error: error.message
             })
             }
     
@@ -38,8 +38,7 @@ const listar = async function(req, res){
         console.log("consultar topicos por codigo");
     
         try {
-            const topicsModelResult = await TopicService.consultarPorCodigo(req.params.filtro || "");
-
+            const topicsModelResult = await TopicsModel.findByPk(req.params.id);
     
             if (topicsModelResult) {
                res.json({
@@ -75,14 +74,12 @@ const listar = async function(req, res){
                 req.body.order,
                 req.body.priority,
                 req.body.color,
-                req.body.owner_user_id,
-                req.body.deleted );
-            
-
+                req.body.owner_user_id );
+        
            res.json({
             success:true,
             topico: topicoRetorno
-           })
+           });
         } catch (error) {
             console.log(error);
             res.json({
@@ -96,7 +93,7 @@ const listar = async function(req, res){
         console.log("eliminar topicos");
     
         try {
-            await TopicService.eliminar(req.params.filtro || "");
+            await TopicsModel.findByPk(req.params.id);
          res.json({
             success: true
          });
@@ -105,8 +102,8 @@ const listar = async function(req, res){
     
            console.log(error);
            res.json({
-            success: true,
-            topico: error.message
+            success: false,
+            error: error.message
          });
             }
     };

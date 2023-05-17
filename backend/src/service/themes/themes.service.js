@@ -10,7 +10,6 @@ const listar = async function(textoBuscar){
         FROM themes
         WHERE 1=1
        AND UPPER(name) LIKE UPPER ('%${textoBuscar}%')
-        AND deleted IS false
         ORDER BY id`);
 
         if(themes && themes[0]){
@@ -26,34 +25,45 @@ const listar = async function(textoBuscar){
     }
 };
 
-const consultarPorCodigo = async function (id) {
+const consultarPorCodigo = async function (req, res ) {
     console.log("consultar temas por codigo");
 
     try {
         // Buscar en la base de datos por codigo
-        const themesModelResult = await ThemesModel.findByPk(id);
+        const themesModelResult = await ThemesModel.findByPk(req.params.id);
 
         if (themesModelResult) {
-           return themesModelResult
+            res.json({
+                success : true ,
+                themes : themesModelResult
+
+            });
+           
             }
      else {
-            return null;
+        res.json({
+            success : true ,
+            themes : null
+
+        });
             }
         }
     catch (error) {
         console.log(error);
-        throw error;
+        res.json({
+            success : false, 
+            error : error.message
+        });
         }
 };
 
-const actualizar = async function (create_date, name, descripcion, keywords, owner_user_id, deleted) {
+const actualizar = async function (id, create_date, name, description, keywords, owner_user_id) {
     console.log("actualizar temas");
-
 
     // res.send("actualiza los usuarios")
     // variables
     let themesRetorno = null; // guarda el usuario que se va incluir o editar
-   const data = {create_date, name, descripcion, keywords, owner_user_id, deleted};
+   const data = {id, create_date, name, description, keywords, owner_user_id};
    // const id = req.body.id;
 
     try {
@@ -61,7 +71,6 @@ const actualizar = async function (create_date, name, descripcion, keywords, own
     let themeExiste = null;
     if (id) {
         themeExiste = await ThemesModel.findByPk(id);
-
     }
     if (themeExiste) {
         // asegurar que el usuario existe, entonces actualizar
@@ -93,6 +102,8 @@ const eliminar = async function (id) {
         throw error;
         }
 };
+
+
 
 
 module.exports = {

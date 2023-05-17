@@ -20,9 +20,6 @@ const ThemesModel = sequelize.define('Themes', {
     },
     owner_user_id: {
         type: DataTypes.INTEGER, allowNull: true
-    },
-    deleted:{
-        type: DataTypes.BOOLEAN, allowNull: false,
     }
 
 }, {

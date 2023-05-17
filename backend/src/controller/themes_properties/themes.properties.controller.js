@@ -32,10 +32,9 @@ const consultarPorCodigo = async function(req, res) {
     console.log("consultar propiedades de temas por codigo");
 
     try{
-          const themesPropertiesModelResult = await themesPropertiesService.consultarPorCodigo(req.params.filtro || ""); 
-        
-
-        if (themesPropertiesModelResult){
+          const themesPropertiesModelResult = await ThemesPropertiesModel.findByPk(req.params.id);
+       
+          if (themesPropertiesModelResult){
             res.json({
                 success : true,
                temasProperties : themesPropertiesModelResult
@@ -50,7 +49,7 @@ const consultarPorCodigo = async function(req, res) {
     console.log(error);
     res.json({
         success : false,
-        temasProperties : error.message
+        error : error.message
     });
  }
 };
@@ -60,23 +59,19 @@ const actualizar =  async function(req, res){
     let themesPropertiesRetorno = null;
     try{ 
 themesPropertiesRetorno = await themesPropertiesService.actualizar(
-    req.body.id,
-    req.body.themes_id,
-    req.body.property_name,
-    req.body.property_value,
-    );
+                                                                    req.body.id,
+                                                                    req.body.themes_id,
+                                                                    req.body.property_name,
+                                                                    req.body.property_value );
         res.json({
             success: true,
             themesProperties : themesPropertiesRetorno
-        })
-       
-                                                                                                                                                                                                                                            
-
+        });                                                                                                                                                                                                                          
     } catch (error){
         console.log(error);
         res.json({
             success : false,
-            themesProperties : error.message
+            error : error.message
         });
     }
 };

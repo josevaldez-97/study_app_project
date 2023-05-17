@@ -32,8 +32,7 @@ const consultarPorCodigo = async function(req, res) {
     console.log("consultar temas por codigo");
 
     try{
-          const themesModelResult = await ThemeService.consultarPorCodigo(req.params.filtro || ""); 
-        
+          const themesModelResult = await ThemesModel.findByPk(req.params.id);
 
         if (themesModelResult){
             res.json({
@@ -59,26 +58,21 @@ const actualizar =  async function(req, res){
     console.log("Actualizar temas");
     let temaRetorno = null;
     try{ 
-temaRetorno = await ThemeService.actualizar(req.body.id,
-    req.body.create_date,
-    req.body.name,
-    req.body.descripcion,
-    req.body.keywords,
-    req.body.owner_user_id,
-    req.body.deleted,
-    );
+        temaRetorno = await ThemeService.actualizar( req.body.id,
+                                                     req.body.create_date,
+                                                     req.body.name,
+                                                     req.body.description,
+                                                     req.body.keywords,
+                                                     req.body.owner_user_id);
         res.json({
             success: true,
-            user: temaRetorno
-        })
-       
-                                                                                                                                                                                                                                            
-
+            temas : temaRetorno
+        });                                                                                                                                                                                                                         
     } catch (error){
         console.log(error);
         res.json({
             success : false,
-            usuarios : error.message
+            error : error.message
         });
     }
 };

@@ -34,7 +34,7 @@ const consultarPorCodigo = async function (req, res) {
 
     try {
         // Buscar en la base de datos por codigo
-        const userModelResult = await UserService.consultarPorCodigo(req.query.filtro || '');
+        const userModelResult = await  UserModel.findByPk(req.params.id);
 
         if (userModelResult) {
             res.json({
@@ -59,23 +59,20 @@ const consultarPorCodigo = async function (req, res) {
 const actualizar = async function (req, res) {
     console.log("actualizar usuarios controller");
 
-
-    // res.send("actualiza los usuarios")
     // variables
     let usuarioRetorno = null; // guarda el usuario que se va incluir o editar
     //const data = req.body; // se optiene los datos del cuerpo de la peticion 
    // const id = req.body.id;
 
-    try {
-        
+    try {   
     usuarioRetorno = await UserService.actualizar(
-        req.body.id, 
-        req.body.name, 
-        req.body.last_name,
-        req.body.avatar,
-        req.body.email,
-        req.body.password,
-        req.body.deleted);
+                                                     req.body.id, 
+                                                     req.body.name, 
+                                                     req.body.last_name,
+                                                     req.body.avatar,
+                                                     req.body.email,
+                                                     req.body.password,
+                                                     req.body.deleted);
 
         res.json({
             success:true,
@@ -84,7 +81,6 @@ const actualizar = async function (req, res) {
 
     } catch (error) {
         console.log(error);
-
          res.json({
         success: false,
         error: error.message
@@ -93,28 +89,22 @@ const actualizar = async function (req, res) {
 }
 
 
-const eliminar = async function (req, res) {
+const eliminar = async function(req, res) {
     console.log("eliminar usuarios");
+    //res.send("eliminar de usuarios");
 
-    // borrado fisico
-   //  UserModel.destroy(req.params.id);
+    //Borrado fisico
+    //UserModel.destroy(req.params.id);
     try {
-
- await UserService.eliminar(req.params.filtro || "");
+        await sequelize.query("UPDATE users SET deleted=true WHERE id = " + req.params.id);
+            
         res.json({
-            success: true
-        })
-
-    /*    await sequelize.query("UPDATE users SET deleted = true WHERE id=  " + req.params.id);
-        res.json({
-            success: true
-        });*/
-
-
+            success : true
+        });
     } catch (error) {
         console.log(error);
         res.json({
-            success: false,
+            success : false, 
             error : error.message
         });
     }

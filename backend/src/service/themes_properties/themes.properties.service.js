@@ -33,7 +33,7 @@ const consultarPorCodigo = async function (id) {
         const themesPropertiesModelResult= await ThemesPropertiesModel.findByPk(id);
 
         if (themesPropertiesModelResult) {
-           return themesPropertiesModelResult
+           return themesPropertiesModelResult;
             }
      else {
             return null;

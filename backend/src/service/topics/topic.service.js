@@ -1,17 +1,17 @@
 const { sequelize } = require("../../connection");
 const { TopicsModel } = require("../../model/topics/topics.model");
 
+
 ///cuando se trata de listar es mejor usar SQL puro por cuestion de tiempo
 const listar = async function (textoBuscar) {
 
     console.log("listar topicos");
 
     try {
-        const topics = await sequelize.query(`SELECT * 
+        const topics = await sequelize.query(`SELECT * clea
         FROM topics
         WHERE 1=1
         AND UPPER(name) LIKE UPPER('%${textoBuscar}%')
-        AND deleted IS false
         ORDER BY id`);
 
         if (topics && topics[0]) {
@@ -46,11 +46,11 @@ const consultarPorCodigo = async function (id) {
         }
 };
 
-const actualizar = async function (id, create_date, name, topic_id, order, priority, color, owner_user_id, deleted) {
+const actualizar = async function (id, create_date, name, topic_id, order, priority, color, owner_user_id) {
     console.log("actualizar topicos");
     //res.send("actualizar de topicos");
     let topicoRetorno = null; //guarda el topico que se va incluir o editar;
-    const data = {id, create_date, name, topic_id, order, priority, color, owner_user_id, deleted}; //se obtiene los datos del cuerpo de la peticion
+    const data = {id, create_date, name, topic_id, order, priority, color, owner_user_id}; //se obtiene los datos del cuerpo de la peticion
 
     try {
         let topicoExiste = null;
