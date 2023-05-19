@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="usuario">
+  <ion-item>
+    <ion-icon aria-hidden="true" name="person-circle" color="primary"></ion-icon>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        <ion-list>
+
+          <ion-input label="Nombre" placeholder="Nombre" [(ngModel)] ="usuario.name"></ion-input>
+
+          <ion-input label="Apellido" placeholder="Apellido" [(ngModel)] ="usuario.last_name"></ion-input>
+
+          <ion-input label="Email" placeholder="Email" [(ngModel)] ="usuario.email"></ion-input>
+        
+        </ion-list>
+
+        <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+          <ion-fab-button (click)= "saveUser()" >
+            <ion-icon name="save"></ion-icon>
+            
+          </ion-fab-button>
+        </ion-fab>
+        
+      </h2>
+    </ion-label>
+  </ion-item>
+  
+</ion-content>

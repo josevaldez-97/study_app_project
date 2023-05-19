@@ -18,4 +18,3 @@ import { MessageComponentModule } from '../message/message.module';
   declarations: [HomePage]
 })
 export class HomePageModule {}
-
