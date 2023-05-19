@@ -38,6 +38,13 @@ export class HomePage implements OnInit{
   }
 
   getUsers () {
+    let token = localStorage.getItem("token");
+    let config = {
+      headers : {
+      "Authorization" : token
+    }
+  };
+
     axios.get("http://localhost:3000/users/list")
     .then( result => {
       if (result.data.success == true) {

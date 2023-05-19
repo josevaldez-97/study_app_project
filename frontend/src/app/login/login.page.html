@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="usuario">
+  <ion-item>
+    
+    <ion-label class="ion-text-wrap">
+      <h2> Login De   Usuario</h2>
+        <ion-list>
+          <ion-input label="Email" placeholder="Email" [(ngModel)] ="usuario.email"></ion-input>
+          <ion-input type="password" label="Password" placeholder="Password" [(ngModel)] ="usuario.password"></ion-input>
+        
+        </ion-list>
+<h2> </h2>
+        <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+          <ion-fab-button (click)= "loginUser()" >
+            <ion-icon name="save"></ion-icon>
+            
+          </ion-fab-button>
+        </ion-fab>
+        
+      
+    </ion-label>
+  </ion-item>
+  
+</ion-content>

@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./edit-user/edit-user.module').then( m => m.EditUserPageModule)
   },
   {
+  path: 'login',
+  loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+},
+
+
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
