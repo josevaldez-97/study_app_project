@@ -130,8 +130,8 @@ const login = async function (req, res) {
                     success: false,
                     error: "Usuario ya Autenticado"
                 });
-                return;
-                //genwerarte un token de autorizacion
+                return
+            }
                 let token = jwt.sign({
                     codigo: user.codigo,
                     name: user.name,
@@ -140,12 +140,11 @@ const login = async function (req, res) {
                     email: user.email
                 }, 'passwd');
                 const usersDBUpdate = await sequelize.query
-                    ("UPDATE users SET token ='" + token + "' WHERE id = '" + user.id);
+                    ("UPDATE users SET token ='"+ token +"'  WHERE id = " + user.id);
                 res.json({
                     success: true,
                     token
                 });
-            }
 
         } else {
             res.json({
@@ -167,7 +166,7 @@ const login = async function (req, res) {
 
 const logout = async function( req ,res){
     try {
-                const usersDB = await sequelize.query("UPDATE users SET token = null where id = " + res.locals.userid + "");
+                const usersDB = await sequelize.query("UPDATE users SET token = null WHERE id =  " +  res.locals.userId + " " );
                 res.json({
                     success : true,
                 });

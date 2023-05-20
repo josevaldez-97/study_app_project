@@ -1,8 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Home 
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> Study App Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +15,7 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-      Home
+        Study App Home
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -26,7 +27,7 @@
         <ion-title>Menu Content</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">This is the menu content.
+    <ion-content class="ion-padding">Study App
       <ion-menu-toggle auto-hide="false">
         <ion-item routerLink="/view-message/' + usuario.id" routerDirection="root">
           <ion-icon slot="start" name="person"></ion-icon>
@@ -47,6 +48,15 @@
           <ion-label>Topics</ion-label>
         </ion-item>
       </ion-menu-toggle>
+
+
+      <ion-fab  slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button routerLink="/login">
+          <ion-icon   name="bookmark-outline"></ion-icon>
+         
+        </ion-fab-button>
+        
+      </ion-fab>
 
 
 

@@ -1,0 +1,66 @@
+{
+	"id": "99e86160-ad94-463a-bbd3-cd4613e0e624",
+	"name": "Study App ApP",
+	"timestamp": "2023-05-20T01:13:19.946Z",
+	"collection_id": "10362710-312dbbc5-e213-480f-bd52-146ea6361540",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-05-20T01:13:19.263Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "1c848ffc-84dd-4f3e-99c2-4a5bd1de1bc7",
+			"name": "users.login",
+			"url": "http://localhost:3000/user/login",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				113
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9caccabd-b903-47b6-914d-7b03633762ed",
+			"name": "users.logout",
+			"url": "http://localhost:3000/user/logout",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				5
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 118,
+	"collection": {
+		"requests": [
+			{
+				"id": "1c848ffc-84dd-4f3e-99c2-4a5bd1de1bc7",
+				"method": "POST"
+			},
+			{
+				"id": "9caccabd-b903-47b6-914d-7b03633762ed",
+				"method": "POST"
+			}
+		]
+	}
+}
